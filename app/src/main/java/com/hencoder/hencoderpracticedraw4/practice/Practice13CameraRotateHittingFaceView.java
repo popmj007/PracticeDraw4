@@ -24,7 +24,7 @@ public class Practice13CameraRotateHittingFaceView extends View {
     Camera camera = new Camera();
     Matrix matrix = new Matrix();
     int degree;
-    ObjectAnimator animator = ObjectAnimator.ofInt(this, "degree", 0, 360);
+    ObjectAnimator animator = ObjectAnimator.ofInt(this, "degree", 360, 0);
 
     public Practice13CameraRotateHittingFaceView(Context context) {
         super(context);
@@ -80,6 +80,7 @@ public class Practice13CameraRotateHittingFaceView extends View {
         matrix.reset();
         camera.rotateX(degree);
         camera.getMatrix(matrix);
+        camera.setLocation(0,0,100);
         camera.restore();
         matrix.preTranslate(-centerX, -centerY);
         matrix.postTranslate(centerX, centerY);
