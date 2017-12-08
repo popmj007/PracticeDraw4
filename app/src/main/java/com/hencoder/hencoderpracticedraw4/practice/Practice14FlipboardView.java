@@ -69,10 +69,24 @@ public class Practice14FlipboardView extends View {
         int bitmapHeight = bitmap.getHeight();
         int centerX = getWidth() / 2;
         int centerY = getHeight() / 2;
-        int x = centerX - bitmapWidth / 2;
-        int y = centerY - bitmapHeight / 2;
+        int x = centerX - bitmapWidth / 2;  //左
+        int y = centerY - bitmapHeight / 2; //上
 
+
+
+        //先绘制上半部分
         canvas.save();
+        canvas.clipRect(x,y,x+bitmapWidth,y+bitmapHeight/2);
+        canvas.drawBitmap(bitmap,x,y,paint);
+        canvas.restore();
+
+        //再根据旋转角度绘制下半部分
+        canvas.save();
+        if (degree<90){
+            canvas.clipRect(x,y+bitmapHeight/2,x+bitmapWidth,y+bitmapHeight);
+        }else {
+            canvas.clipRect(x,y,x+bitmapWidth,y+bitmapHeight/2);
+        }
 
         camera.save();
         camera.rotateX(degree);
